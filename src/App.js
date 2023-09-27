@@ -9,6 +9,7 @@ import AddCar from "./cars/AddCar";
 import EditCar from "./cars/EditCar";
 import RegisteredCars from "./cars/RegisteredCars";
 import UnRegisteredCars from "./cars/UnRegisteredCars";
+import SearchAndFilterCar from "./cars/SearchAndFilterCar";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
                 <Route exact path="/editCar/:id" element={<EditCar/>}/>
                 <Route exact path="/registeredCars" element={<RegisteredCars/>}/>
                 <Route exact path="/unRegisteredCars" element={<UnRegisteredCars/>}/>
+                <Route exact path="/searchAndFilterByRange/:startYear?/:endYear?/:search?" element={<SearchAndFilterCar/>}/>
             </Routes>
 
         </Router>

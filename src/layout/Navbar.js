@@ -1,11 +1,10 @@
-import React, {useEffect, useState} from 'react';
-import {Link} from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Navbar() {
-    const [startYear, setStartYear] = useState("")
-    const [endYear, setEndYear] = useState("")
-    const [searchText, setSearchText] = useState("")
-
+    const [startYear, setStartYear] = useState("");
+    const [endYear, setEndYear] = useState("");
+    const [searchText, setSearchText] = useState("");
 
     const handleStartYearChange = (e) => {
         setStartYear(e.target.value);
@@ -18,6 +17,13 @@ export default function Navbar() {
     const handleSearchTextChange = (e) => {
         setSearchText(e.target.value);
     };
+
+    const navigate = useNavigate();
+
+    const handleClick = () => {
+        navigate(`/searchAndFilterByRange/${startYear}/${endYear}/${searchText}`);
+    }
+
     return (
         <div>
             <nav className="navbar navbar-expand-lg" style={{ backgroundColor: '#184927' }}>
@@ -45,16 +51,16 @@ export default function Navbar() {
                                     <a className="nav-link ml-2" href="javascript:void(0)" style={{ color: 'whitesmoke' }}>
                                         Year Range:
                                     </a>
-                                    <input className="form-control me-2 ml-2" id="startYear" name="startYear" placeholder="startYear:" style={{ width: '100px' }} type="number" value={startYear} onChange={(e)=>{handleStartYearChange()}} />
-                                    <input className="form-control me-2" id="endYear" name="endYear" placeholder="endYear:" style={{ width: '100px' }} type="number" value={endYear} onChange={(e)=>{handleEndYearChange(e)}}/>
-                                    <button className="btn btn-outline-success" id="filterByRangeYear">
+                                    <input className="form-control me-2 ml-2" id="startYear" defaultValue={1920} name="startYear" placeholder="startYear:" style={{ width: '100px' }} type="number" value={startYear} onChange={handleStartYearChange} />
+                                    <input className="form-control me-2" id="endYear" defaultValue={2023} name="endYear" placeholder="endYear:" style={{ width: '100px' }} type="number" value={endYear} onChange={handleEndYearChange} />
+                                    <button onClick={handleClick} className="btn btn-outline-success" id="filterByRangeYear">
                                         Filter
                                     </button>
                                 </div>
                             </li>
                         </ul>
-                        <input aria-label="Search" className="form-control me-2" id="search" name="search" placeholder="Search" style={{ width: '150px' }} type="search" value={searchText} onChange={(e)=>{handleSearchTextChange(e)}}/>
-                        <button className="btn btn-outline-success" id="searchBtn">
+                        <input aria-label="Search" className="form-control me-2" id="search" name="search" placeholder="Search" style={{ width: '150px' }} type="search" value={searchText} onChange={handleSearchTextChange} />
+                        <button onClick={handleClick} className="btn btn-outline-success" id="searchBtn">
                             Search
                         </button>
                     </div>
