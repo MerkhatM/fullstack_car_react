@@ -2,14 +2,14 @@ import React, {useEffect, useState} from 'react';
 import axios from "axios";
 import {Link, useParams} from "react-router-dom";
 
-export default function Home() {
+export default function UnRegisteredCars() {
     const {id}=useParams()
     const [cars,setCars]=useState([])
     useEffect(()=>{
         loadCars()
     },[])
     const loadCars=async ()=>{
-        const result =await axios.get("http://localhost:8090/cars")
+        const result =await axios.get("http://localhost:8090/cars/unRegisteredInKz")
         setCars(result.data)
     }
     const deleteCar=async(id)=>{
