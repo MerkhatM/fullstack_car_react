@@ -30,22 +30,53 @@ export default function Navbar() {
                 <div className="container-fluid">
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                            <li><Link className="btn btn-outline-secondary" to="/addCar">Add Car</Link></li>
-                            <li className="nav-item">
-                                <a aria-current="page" className="nav-link active" href="/" style={{ color: 'whitesmoke' }}>
-                                    All cars
+
+                            <li className="nav-item dropdown">
+                                <a className="nav-link dropdown-toggle" href="/" role="button" data-bs-toggle="dropdown"
+                                   aria-expanded="false" style={{ color: '#c7c124' }}>
+                                    Car
                                 </a>
+                                <ul className="dropdown-menu">
+                                    <li><a aria-current="page" className="dropdown-item" href="/" style={{ color: '#c7c124' }}>All cars</a></li>
+                                    <li><a className="dropdown-item" href="/registeredCars" id="registeredInKz" style={{ color: '#c7c124' }}>Registered Cars</a></li>
+                                    <li><a className="dropdown-item" href="/unRegisteredCars" id="unRegisteredInKz" style={{ color: '#c7c124' }}>Unregistered Cars</a></li>
+                                    <li>
+                                        <hr className="dropdown-divider"/>
+                                    </li>
+                                    <li><Link className="bg-body-secondary dropdown-item" to="/addCar" style={{ color: '#c7c124' }}>Add Car</Link></li>
+                                </ul>
                             </li>
-                            <li className="nav-item">
-                                <a className="nav-link" href="/registeredCars" id="registeredInKz" style={{ color: 'whitesmoke' }}>
-                                    Registered Cars
+
+                            <li className="nav-item dropdown">
+                                <a className="nav-link dropdown-toggle" href="/categoryPage" role="button" data-bs-toggle="dropdown"
+                                   aria-expanded="false" style={{ color: '#c7c124' }}>
+                                    Category
                                 </a>
+                                <ul className="dropdown-menu">
+                                    <li><a aria-current="page" className="dropdown-item" href="/categoryPage" style={{ color: '#c7c124' }}>All categories</a></li>
+                                    <li>
+                                        <hr className="dropdown-divider"/>
+                                    </li>
+                                    <li><Link className="bg-body-secondary dropdown-item" to="/addCategory" style={{ color: '#c7c124' }}>Add category</Link></li>
+                                </ul>
                             </li>
-                            <li className="nav-item">
-                                <a className="nav-link" href="/unRegisteredCars" id="unRegisteredInKz" style={{ color: 'whitesmoke' }}>
-                                    Unregistered Cars
+
+                            <li className="nav-item dropdown">
+                                <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                   aria-expanded="false" style={{ color: '#c7c124' }}>
+                                    Country
                                 </a>
+                                <ul className="dropdown-menu">
+                                    <li><a aria-current="page" className="dropdown-item" href="/countryPage" style={{ color: '#c7c124' }}>All countries</a></li>
+                                    <li>
+                                        <hr className="dropdown-divider"/>
+                                    </li>
+                                    <li><Link className="bg-body-secondary dropdown-item" to="/addCountry" style={{ color: '#c7c124' }}>Add country</Link></li>
+                                </ul>
                             </li>
+
+
+
                             <li>
                                 <div className="d-flex">
                                     <a className="nav-link ml-2" href="javascript:void(0)" style={{ color: 'whitesmoke' }}>
