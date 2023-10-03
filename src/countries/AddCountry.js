@@ -17,7 +17,7 @@ export default function AddCountry() {
 
     const onSubmit =async (e) => {
         e.preventDefault()
-        await axios.post("http://localhost:8090/countrys",country)
+        await axios.post("http://localhost:8090/countries",country)
         navigate("/countryPage")
 
     }

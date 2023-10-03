@@ -6,15 +6,15 @@ export default function CountryPage() {
     const {id}=useParams()
     const [countries,setCountries]=useState([])
     useEffect(()=>{
-        loadCategory()
+        loadCountry()
     },[])
-    const loadCategory=async ()=>{
+    const loadCountry=async ()=>{
         const result =await axios.get("http://localhost:8090/countries")
         setCountries(result.data)
     }
     const deleteCountry=async(id)=>{
         await axios.delete(`http://localhost:8090/countries/${id}`)
-        loadCategory()
+        loadCountry()
     }
     return (
         <div className="mt-4 col-10 mx-auto">

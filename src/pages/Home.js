@@ -26,18 +26,20 @@ export default function Home() {
                     <th>YEAR</th>
                     <th>COLOR</th>
                     <th>REGISTERED IN KZ</th>
+                    <th>COUNTRY</th>
                     <th>DETAILS</th>
                     <th>DELETE</th>
                 </thead>
                 <tbody id="allCars">
                     {cars.map((car,index)=>(
-                         <tr>
+                         <tr key={car.id}>
                              <th scope="row" key={index}>{car.id}</th>
                              <td>{car.mark} </td>
                              <td>{car.model} </td>
                              <td> {car.year} </td>
                              <td> {car.color} </td>
                              <td> {car.registrationKz? 'Registered' : 'Unregistered'} </td>
+                             <td>{car.country.name}</td>
                              <td><Link className='btn btn-info' to={`/editCar/${car.id}`} >EDIT</Link></td>
                              <td><Link className='btn btn-danger' onClick={()=>{deleteCar(car.id)}} >DELETE</Link></td>
                          </tr>
