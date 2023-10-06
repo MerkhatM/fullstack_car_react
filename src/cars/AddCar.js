@@ -6,17 +6,17 @@ export default function AddCar() {
     let navigate = useNavigate()
 
     const [countries, setCountries] = useState([])
+    const [categories, setCategories] = useState([])
+
     useEffect(() => {
         loadCountry();
         loadCategory();
-        loadCountry();
+
     }, [])
     const loadCountry = async () => {
         const result = await axios.get("http://localhost:8090/countries")
         setCountries(result.data)
     }
-
-    const [categories, setCategories] = useState([])
     const loadCategory = async () => {
         const result = await axios.get("http://localhost:8090/categories")
         setCategories(result.data)
@@ -30,16 +30,14 @@ export default function AddCar() {
         country: {
             id: ""
         },
-        categories:[]
+        categories: []
     })
     const {mark, model, year, color, registrationKz} = car
 
 
     const onInputChang = (e) => {
-        // Split the name attribute to get the nested property
         const [fieldName, nestedField] = e.target.name.split('.');
         if (nestedField === "id") {
-            // If it's the 'id' property of 'country', update it
             setCar({
                 ...car,
                 [fieldName]: {
@@ -48,8 +46,7 @@ export default function AddCar() {
                 }
             });
         } else {
-            // If it's not a nested field or not the 'id' property, update it normally
-            setCar({ ...car, [fieldName]: e.target.value });
+            setCar({...car, [fieldName]: e.target.value});
         }
     };
     const [selectedCategoryIds, setSelectedCategoryIds] = useState([]); // New state for selected category IDs
@@ -62,21 +59,19 @@ export default function AddCar() {
             setSelectedCategoryIds([...selectedCategoryIds, categoryId]);
         }
     };
-    const setCategoryToCar=(e)=>{
-        setCar( {
+    const setCategoryToCar = (e) => {
+        setCar({
             ...car,
-            categories: selectedCategoryIds.map(id => ({ id })),
+            categories: selectedCategoryIds.map(id => ({id})),
         });
     }
 
     const onSubmit = async (e) => {
         e.preventDefault();
 
-        // Now, you can send the car object to the server
         await axios.post("http://localhost:8090/cars", car);
         navigate("/");
     };
-
 
 
     return (
@@ -103,15 +98,18 @@ export default function AddCar() {
 
                         <div className="mb-3">
                             <label className="form-label">Color</label>
-                            <input className="form-control" name="color" onChange={(e) => onInputChang(e)} value={color} placeholder="Insert color"
-                                   type={"text"} />
+                            <input className="form-control" name="color" onChange={(e) => onInputChang(e)} value={color}
+                                   placeholder="Insert color"
+                                   type={"text"}/>
 
                         </div>
                         <div className="mb-3">
                             <label className="form-label">Country</label>
-                            <select name="country.id"  value={car.country.id} onChange={(e) => onInputChang(e)} className="form-select">
+                            <select name="country.id" value={car.country.id} onChange={(e) => onInputChang(e)}
+                                    className="form-select">
                                 {countries.map((country, index) => (
-                                    <option key={country.id} value={country.id}>{country.name + " -- " + country.shortName}</option>
+                                    <option key={country.id}
+                                            value={country.id}>{country.name + " -- " + country.shortName}</option>
                                 ))
                                 }
                             </select>
@@ -127,16 +125,15 @@ export default function AddCar() {
                             <label htmlFor="registrationKz2">NO</label>
 
                         </div>
-
-
-                        <button className="btn btn-success me-3" type={"submit"}>SUBMIT</button>
-                        <Link className="btn btn-outline-danger" to="/">CANCEL</Link>
-
-
-                        <button type="button" className="btn btn-primary" data-bs-toggle="modal"
+                        <button type="button" className="btn btn-primary my-2" data-bs-toggle="modal"
                                 data-bs-target="#exampleModal">
-                            Назначить категории:
+                            ВЫБОР КУЗОВА:
                         </button>
+                        <br/>
+                        <button className="btn btn-success me-3" type={"submit"}>SUBMIT</button>
+                        <Link className="btn btn-outline-danger me-3" to="/">CANCEL</Link>
+
+
 
 
                         <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel"
@@ -159,7 +156,9 @@ export default function AddCar() {
                                             {categories.map((category, index) => (
                                                 <tr key={category.id}>
                                                     <td><input type="checkbox" name="categories.id"
-                                                               value={category.id} onChange={() => handleCategorySelection(category.id)}/></td>
+                                                               value={category.id}
+                                                               onChange={() => handleCategorySelection(category.id)}/>
+                                                    </td>
                                                     <td>{category.type}</td>
                                                 </tr>
                                             ))}
@@ -169,9 +168,14 @@ export default function AddCar() {
 
                                     </div>
                                     <div className="modal-footer">
-                                        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close
+                                        <button type="button" className="btn btn-secondary"
+                                                data-bs-dismiss="modal">Close
                                         </button>
-                                        <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={(e)=>{setCategoryToCar(e)}} >Save changes</button>
+                                        <button type="button" className="btn btn-primary" data-bs-dismiss="modal"
+                                                onClick={(e) => {
+                                                    setCategoryToCar(e)
+                                                }}>Save changes
+                                        </button>
                                     </div>
                                 </div>
                             </div>
